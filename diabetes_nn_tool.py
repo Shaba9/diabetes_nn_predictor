@@ -179,10 +179,8 @@ def compute_metrics(y_true, y_pred, y_prob):
 
 def write_markdown_report(path: str, title: str, summary: dict, metrics: dict | None, files: list[str], disclaimer=True):
     lines = []
-    lines.append(f"# {title}
-")
-    lines.append(f"**Run time:** {datetime.now().isoformat(timespec='seconds')}
-")
+    lines.append(f"# {title}")
+    lines.append(f"**Run time:** {datetime.now().isoformat(timespec='seconds')}")
     for k, v in summary.items():
         lines.append(f"- **{k}:** {v}")
     lines.append('')
@@ -196,25 +194,21 @@ def write_markdown_report(path: str, title: str, summary: dict, metrics: dict | 
         lines.append(f"- ROC-AUC: **{metrics['roc_auc']:.3f}**" if metrics['roc_auc'] is not None else "- ROC-AUC: **N/A**")
         lines.append('')
         lines.append('### Confusion Matrix')
-        lines.append('Rows = true label, columns = predicted label
-')
+        lines.append('Rows = true label, columns = predicted label')
         lines.append('```')
         lines.append(str(metrics['confusion_matrix']))
-        lines.append('```
-')
+        lines.append('```')
 
     lines.append('## Files Produced')
     for f in files:
         lines.append(f"- `{f}`")
 
     if disclaimer:
-        lines.append('
----')
+        lines.append('---')
         lines.append('**Disclaimer:** This project is educational and not intended for medical use.')
 
     with open(path, 'w', encoding='utf-8') as fp:
-        fp.write('
-'.join(lines))
+        fp.write(''.join(lines))
 
 
 # -------------------------
@@ -272,8 +266,7 @@ def run_train(args):
     metrics, cm = compute_metrics(y_test, y_pred, y_prob)
 
     # Human-friendly console output
-    print('
-' + '=' * 72)
+    print('' + '=' * 72)
     print('DIABETES PREDICTION — TRAIN MODE (Educational)')
     print('=' * 72)
     print(f"Dataset: {os.path.basename(args.csv)}")
@@ -380,16 +373,14 @@ def run_train(args):
         ]
     )
 
-    print('
-Outputs saved to:', run_dir)
+    print('Outputs saved to:', run_dir)
     print('Artifacts:')
     print(' -', model_path)
     print(' -', preproc_path)
     print(' -', meta_path)
     print(' -', preds_path)
     print(' -', report_md_path)
-    print('=' * 72 + '
-')
+    print('=' * 72 + '')
 
 
 # -------------------------
@@ -457,8 +448,7 @@ def run_predict(args):
         metrics, cm = compute_metrics(y_true, pred, prob)
 
     # Console output
-    print('
-' + '=' * 72)
+    print('' + '=' * 72)
     print('DIABETES PREDICTION — PREDICT MODE (Educational)')
     print('=' * 72)
     print(f"Input CSV: {os.path.basename(args.csv)}")
@@ -517,12 +507,10 @@ def run_predict(args):
         files=['predictions.csv', 'report.json'],
     )
 
-    print('
-Saved:')
+    print('Saved:')
     print(' -', preds_path)
     print(' -', report_md_path)
-    print('=' * 72 + '
-')
+    print('=' * 72 + '')
 
 
 def parse_args():

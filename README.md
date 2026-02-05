@@ -28,13 +28,13 @@ source .venv/bin/activate
 
 ### 2) Install dependencies
 ```bash
-pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
 
 ### 3) Train
 Put your dataset CSV in this folder (example: `diabetes.csv`) and run:
 ```bash
-python diabetes_nn_tool.py --mode train --csv diabetes.csv --target Outcome
+python diabetes_nn_tool.py --mode train --csv sample_diabetes.csv --target Outcome
 ```
 
 This creates a timestamped run folder under `outputs/` containing:
