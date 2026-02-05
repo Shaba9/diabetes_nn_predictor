@@ -1,0 +1,12 @@
+{
+  "predict_dir": "outputs\\predict_20260204_173835",
+  "input_csv": "new_patients.csv",
+  "model_dir": "outputs/run_v1",
+  "rows": 40,
+  "target_in_csv": false,
+  "metrics": null,
+  "notes": [
+    "Predict mode uses the saved preprocessor + neural network from train mode.",
+    "Probabilities are mapped to simple Low/Moderate/High risk buckets for readability."
+  ]
+}
