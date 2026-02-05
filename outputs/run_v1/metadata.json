@@ -1,0 +1,33 @@
+{
+  "task": "diabetes_binary_classification",
+  "target": "Outcome",
+  "feature_cols": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "numeric_cols": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "categorical_cols": [],
+  "threshold": 0.5,
+  "train_params": {
+    "epochs": 60,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "test_size": 0.2,
+    "random_state": 42
+  }
+}
