@@ -1,1 +1,0 @@
-# Diabetes Prediction — Neural Network Report (Predict)**Run time:** 2026-02-04T17:38:35- **Input CSV:** new_patients.csv- **Model folder:** outputs/run_v1- **Rows:** 40- **Prediction folder:** outputs\predict_v1## Files Produced- `predictions.csv`- `report.json`---**Disclaimer:** This project is educational and not intended for medical use.

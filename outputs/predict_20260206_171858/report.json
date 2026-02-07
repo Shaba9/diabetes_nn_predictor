@@ -1,7 +1,7 @@
 {
-  "predict_dir": "outputs\\predict_20260204_173835",
+  "predict_dir": "outputs\\predict_20260206_171858",
   "input_csv": "new_patients.csv",
-  "model_dir": "outputs/run_v1",
+  "model_dir": "outputs/run_20260206_171459",
   "rows": 40,
   "target_in_csv": false,
   "metrics": null,
