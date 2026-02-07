@@ -23,7 +23,7 @@ from tensorflow.keras import layers
 
 
 # -------------------------
-# Utilities
+# Create timestamped folders
 # -------------------------
 
 def make_dir(path: str) -> str:
@@ -34,6 +34,9 @@ def make_dir(path: str) -> str:
 def now_stamp() -> str:
     return datetime.now().strftime('%Y%m%d_%H%M%S')
 
+# -------------------------
+# Convert predicted probability into a readable category
+# -------------------------
 
 def risk_bucket(p: float) -> str:
     if p < 0.33:
@@ -42,6 +45,11 @@ def risk_bucket(p: float) -> str:
         return 'Moderate'
     return 'High'
 
+# -------------------------
+# Handle empty rows
+# If numeric >> fill missing values with the median
+# Else (categorical/text) >> fill missing with the mode or "Unknown" if no mode exists
+# -------------------------
 
 def fill_missing(df: pd.DataFrame) -> pd.DataFrame:
     df = df.dropna(how='all').copy()
@@ -55,6 +63,9 @@ def fill_missing(df: pd.DataFrame) -> pd.DataFrame:
                 df[col] = df[col].fillna(fill_val)
     return df
 
+# -------------------------
+# Detect which columns are features, numeric, or categorical
+# -------------------------
 
 def detect_feature_types(df: pd.DataFrame, target_col: str, feature_cols=None):
     if feature_cols is None:
@@ -64,6 +75,9 @@ def detect_feature_types(df: pd.DataFrame, target_col: str, feature_cols=None):
     categorical_cols = [c for c in feature_cols if c not in numeric_cols]
     return feature_cols, numeric_cols, categorical_cols
 
+# -------------------------
+# Creates a scikit-learn ColumnTransformer that applies numeric and categorical pipelines
+# -------------------------
 
 def build_preprocessor(numeric_cols, categorical_cols):
     numeric_transformer = Pipeline(steps=[('scaler', StandardScaler())])
@@ -77,6 +91,9 @@ def build_preprocessor(numeric_cols, categorical_cols):
         remainder='drop'
     )
 
+# -------------------------
+# Create a small neural network and complie settings
+# -------------------------
 
 def build_model(input_dim: int, learning_rate: float = 1e-3) -> keras.Model:
     model = keras.Sequential([
@@ -99,6 +116,9 @@ def build_model(input_dim: int, learning_rate: float = 1e-3) -> keras.Model:
     )
     return model
 
+# -------------------------
+# Plot training curves
+# -------------------------
 
 def plot_training_curves(history: keras.callbacks.History, out_path: str):
     hist = history.history
@@ -130,6 +150,9 @@ def plot_training_curves(history: keras.callbacks.History, out_path: str):
     plt.savefig(out_path, dpi=160)
     plt.close()
 
+# -------------------------
+# Plot confusion matrix
+# -------------------------
 
 def plot_confusion_matrix(cm: np.ndarray, out_path: str):
     plt.figure(figsize=(5, 4))
@@ -208,7 +231,7 @@ def write_markdown_report(path: str, title: str, summary: dict, metrics: dict | 
         lines.append('**Disclaimer:** This project is educational and not intended for medical use.')
 
     with open(path, 'w', encoding='utf-8') as fp:
-        fp.write(''.join(lines))
+        fp.write('\n'.join(lines))
 
 
 # -------------------------
